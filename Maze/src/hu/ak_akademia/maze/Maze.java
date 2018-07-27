@@ -1,5 +1,9 @@
 package hu.ak_akademia.maze;
-
+/**
+ * 
+ * @author balag
+ *Labirintus, két mezője van. A játékos és maga az épület
+ */
 public class Maze {
 	private Player player;
 	private char[][] maze;
@@ -14,7 +18,11 @@ public class Maze {
 	public Maze() {
 		player = new Player();
 	}
-	
+	/**
+	 * Melyik irányba lépjen a játékos.
+	 * Annak megfelelően megváltoztatja a játékos koordinátáit
+	 * @param direction
+	 */
 	public void move(String direction) {
 		int oldX = player.getCoorX();
 		int oldY = player.getCoorY();
@@ -36,13 +44,22 @@ public class Maze {
 			break;
 		default: break;
 		}
+		if(newX < 0 || newY<0 || newX >= maze.length || newY >= maze[0].length) {
+			return;
+		}
 		
 		if(!isFree(newX,newY)) {
 			return;
 		}
+		
 		maze[oldX][oldY] = ' ';
 		player.setCoordinates(newX, newY);
 		putPlayerInMaze(player);
+		
+		if(newX == maze.length - 2 && newY == maze[maze.length - 2].length - 1) {
+			System.out.println("You have escaped.");
+			System.exit(0);
+		}
 	
 	}
 	
