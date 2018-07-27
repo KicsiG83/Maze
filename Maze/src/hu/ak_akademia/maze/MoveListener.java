@@ -8,8 +8,14 @@ import java.awt.event.KeyEvent;
  * @author balag
  *
  */
+
 public class MoveListener extends KeyAdapter {
 	TextField textFiled = new TextField();
+	String direction;
+	
+	public String getDirection() {
+		return direction;
+	}
 	@Override
 	public void keyPressed(KeyEvent e){
 		//System.out.println("Key Pressed: " + e.getKeyChar());
@@ -24,10 +30,22 @@ public class MoveListener extends KeyAdapter {
 			return;
 		}
 		switch(e.getKeyChar()) {
-		case 'a': textFiled.setText("Go left! ");break;
-		case 's': textFiled.setText("Go down! ");break;
-		case 'd': textFiled.setText("Go right! ");break;
-		case 'w': textFiled.setText("Go up! ");break;
+		case 'a':
+			textFiled.setText("Go left! ");
+			direction = "left";
+			break;
+		case 's':
+			textFiled.setText("Go down! ");
+			direction = "down";
+			break;
+		case 'd':
+			textFiled.setText("Go right! ");
+			direction = "right";
+			break;
+		case 'w':
+			textFiled.setText("Go up! ");
+			direction = "up";
+			break;
 		default:
 		}
 	}
