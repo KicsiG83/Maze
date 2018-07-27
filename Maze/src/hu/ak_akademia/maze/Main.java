@@ -14,6 +14,7 @@ public class Main {
 		new Print().printWelcome();
 		int size = new Input().userInput(sc);
 		MazeGenerator maze = new MazeGenerator(size);
+		new MazeFrame();
 		maze.display();
 	}
 }
