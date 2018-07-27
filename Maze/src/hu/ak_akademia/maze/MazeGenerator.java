@@ -15,21 +15,30 @@ public class MazeGenerator {
 		generateMaze(0, 0);
 	}
 
-	public void display() {
+	public char[][] display() {
+		String mazeInString = "";
 		for (int i = 0; i < y; i++) {
 			// draw the north edge
 			for (int j = 0; j < x; j++) {
-				System.out.print((maze[j][i] & 1) == 0 ? "+---" : "+   ");
+				String s = (maze[j][i] & 1) == 0 ? "+---" : "+   ";
+				mazeInString = mazeInString + s;
+				System.out.print(s);
 			}
+			mazeInString = mazeInString + "+\n";
 			System.out.println("+");
 			// draw the west edge
 			for (int j = 0; j < x; j++) {
+				String s;
 				if (i == 0 && j == 0) {
-					System.out.print((maze[j][i] & 8) == 0 ? "    " : "    ");
+					s = (maze[j][i] & 8) == 0 ? "    " : "    ";
 				} else {
-					System.out.print((maze[j][i] & 8) == 0 ? "|   " : "    ");
+					s = (maze[j][i] & 8) == 0 ? "|   " : "    ";
 				}
+				mazeInString = mazeInString + s;
+				System.out.print(s);
 			}
+			String west = i == y - 1 ? " \n" : "|\n";
+			mazeInString = mazeInString + west;
 			if (i == y - 1) {
 				System.out.println("");
 			} else {
@@ -38,9 +47,24 @@ public class MazeGenerator {
 		}
 		// draw the bottom line
 		for (int j = 0; j < x; j++) {
-			System.out.print("+---");
+			String s = "+---";
+			mazeInString = mazeInString + s;
+			System.out.print(s);
 		}
+		mazeInString = mazeInString + "+\n";
 		System.out.println("+");
+
+		String[] resultArray = mazeInString.split("\n");
+		int n = resultArray.length;
+		int m = resultArray[0].toCharArray().length;
+		char[][] result = new char[n][m];
+		for(int i= 0; i < n;i++) {
+			for (int j = 0; j < m; j++) {
+				result[i][j] = resultArray[i].toCharArray()[j];
+			}
+		
+		}
+		return result;
 	}
 
 	private void generateMaze(int cx, int cy) {

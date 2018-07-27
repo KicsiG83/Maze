@@ -13,8 +13,8 @@ public class Main {
 	private void run(Scanner sc) {
 		new Print().printWelcome();
 		int size = new Input().userInput(sc);
-		MazeGenerator maze = new MazeGenerator(size);
-		new MazeFrame();
-		maze.display();
+		char[][] maze = new MazeGenerator(size).display();
+		MazeFrame frame = new MazeFrame(maze);
+		
 	}
 }

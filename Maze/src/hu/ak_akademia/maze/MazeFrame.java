@@ -19,11 +19,11 @@ public class MazeFrame extends KeyAdapter implements ActionListener  {
 	TextArea mazeOnScreen;
 	TextField tf = new TextField();
 	
-	public MazeFrame() {
+	public MazeFrame(char[][] mazeInChar) {
 		frame = new JFrame("A&K - Maze");
 		timer = new Timer(1000,this);
 		maze = new Maze();
-		maze.setMaze(new TestMaze().test());
+		maze.setMaze(mazeInChar);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mazeOnScreen = new TextArea();
 		mazeOnScreen.setFont(new Font("Monospaced",0,12));
@@ -37,6 +37,10 @@ public class MazeFrame extends KeyAdapter implements ActionListener  {
 		frame.setVisible(true);
 		
 		frame.add(tf,"South");
+	}
+
+	public Maze getMaze() {
+		return maze;
 	}
 
 	@Override
