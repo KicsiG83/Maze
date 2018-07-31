@@ -12,9 +12,10 @@ public class Main {
 
 	private void run(Scanner sc) {
 		new Print().printWelcome();
-		int size = new Input().userInput(sc);
-		char[][] maze = new MazeGenerator(size).display();
-		MazeFrame frame = new MazeFrame(maze);
+		new Menu(sc);
+	//	int size = new Input().userInput(sc);
+	//	char[][] maze = new MazeGenerator(size).display();
+	//	MazeFrame frame = new MazeFrame(maze);
 		
 	}
 }

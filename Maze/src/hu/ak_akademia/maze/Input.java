@@ -2,7 +2,7 @@ package hu.ak_akademia.maze;
 
 import java.util.Scanner;
 
-public class Input {
+public class Input { 
 
 	private int smallOrLarge; // a pálya mérete
 
@@ -12,8 +12,8 @@ public class Input {
 		System.out.println(" ╚ 2. large size");
 		System.out.print("Please choose which size you want to play: ");
 		String size = sc.nextLine();
-		while (!new Validators().isValidSize(size)) {
-			System.out.print("The input was wrong, please try again (1 or 2): ");
+		while (!new Validators().isValidNumber(size)) {
+			System.out.print("The input was wrong, please try again (1, 2 or 3): ");
 			size = sc.nextLine();
 		}
 		setSmallOrbig(Integer.parseInt(size));
