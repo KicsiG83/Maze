@@ -23,7 +23,7 @@ public class Maze {
 	 * Annak megfelelően megváltoztatja a játékos koordinátáit
 	 * @param direction
 	 */
-	public void move(String direction) {
+	public void movePlayer(String direction) {
 		int oldX = player.getCoorX();
 		int oldY = player.getCoorY();
 		int newX = oldX;

@@ -12,7 +12,9 @@ public class Main {
 
 	private void run(Scanner sc) {
 		new Print().printWelcome();
-		new Menu(sc);
+		Game game = new Game(new GameSetting(sc));
+		char[][] maze = new MazeGenerator(game.getSizeOfMaze()).display();
+		MazeFrame frame = new MazeFrame(maze);
 	//	int size = new Input().userInput(sc);
 	//	char[][] maze = new MazeGenerator(size).display();
 	//	MazeFrame frame = new MazeFrame(maze);

@@ -56,22 +56,22 @@ public class MazeFrame extends KeyAdapter implements ActionListener  {
 		switch(e.getKeyChar()) {
 		case 'a':
 			 tf.setText("balra");
-			 maze.move("left");
+			 maze.movePlayer("left");
 			 mazeOnScreen.setText(maze.toString());
 			break;
 		case 's':			
 			tf.setText("le"); 
-			maze.move("down");
+			maze.movePlayer("down");
 			 mazeOnScreen.setText(maze.toString());
 			break;
 		case 'd':
 			tf.setText("jobbra");
-			 maze.move("right");
+			 maze.movePlayer("right");
 			 mazeOnScreen.setText(maze.toString());
 			break;
 		case 'w':
 			tf.setText("fel");
-			maze.move("up");
+			maze.movePlayer("up");
 			mazeOnScreen.setText(maze.toString());
 			break;
 		default:
