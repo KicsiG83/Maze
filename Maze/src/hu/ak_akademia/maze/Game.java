@@ -25,4 +25,9 @@ public class Game {
 		return radiusOfAgressitivity;
 	}
 	
+	public Enemy constructEnemy() {
+		Enemy newEnemy = new Enemy(radiusOfAgressitivity);
+		return newEnemy;
+	}
+	
 }

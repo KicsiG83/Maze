@@ -1,4 +1,7 @@
 package hu.ak_akademia.maze;
+
+import java.util.ArrayList;
+
 /**
  * 
  * @author balag
@@ -7,9 +10,14 @@ package hu.ak_akademia.maze;
 public class Maze {
 	private Player player;
 	private char[][] maze;
+	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 	public char[][] getMaze() {
 		return maze;
+	}
+
+	public ArrayList<Enemy> getEnemies() {
+		return enemies;
 	}
 
 	public void setMaze(char[][] maze) {
@@ -54,7 +62,7 @@ public class Maze {
 		
 		maze[oldX][oldY] = ' ';
 		player.setCoordinates(newX, newY);
-		putPlayerInMaze(player);
+		putMovableToMaze(player);
 		
 		if(newX == maze.length - 2 && newY == maze[maze.length - 2].length - 1) {
 			System.out.println("You have escaped.");
@@ -69,14 +77,17 @@ public class Maze {
 		}
 		return false;
 	}
-	private void putPlayerInMaze(Player player) {
-		maze[player.getCoorX()][player.getCoorY()] = player.getSymbolInMaze();
+	private void putMovableToMaze(Movable obj) {
+		maze[obj.getCoorX()][obj.getCoorY()] = obj.getSymbolInMaze();
 	}
 	
 	@Override
 	public String toString() {
-		putPlayerInMaze(player);
+		putMovableToMaze(player);
 		String result = "";
+		for(Movable obj : enemies) {
+			putMovableToMaze(obj);
+		}
 		for(int i= 0;i<maze.length;i++) {
 			for (int j=0;j<maze[i].length;j++)  {
 				result = result + maze[i][j];
@@ -84,6 +95,11 @@ public class Maze {
 			result = result + "\n";
 		}
 		return result;
+	}
+
+	public void moveEnemies() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
