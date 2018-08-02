@@ -33,6 +33,12 @@ public class Main {
 			frame.getMaze().getEnemies().add(enemies[index]);
 			index++;
 		}
+
+		while(frame.getFrame().isActive()) {
+			
+		}
+		System.out.println("Game Over");
+		return; //jelenleg ez a vége a programnak
 		
 		
 	}

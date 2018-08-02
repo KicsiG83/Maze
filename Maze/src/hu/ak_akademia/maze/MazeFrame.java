@@ -24,6 +24,7 @@ public class MazeFrame extends KeyAdapter implements ActionListener  {
 		timer = new Timer(1000,this);
 		maze = new Maze();
 		maze.setMaze(mazeInChar);
+		maze.setFrame(frame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mazeOnScreen = new TextArea();
 		mazeOnScreen.setFont(new Font("Monospaced",0,12));
@@ -78,4 +79,13 @@ public class MazeFrame extends KeyAdapter implements ActionListener  {
 		default:
 		}
 	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	public void stopTimer() {
+		timer.stop();
+	}
+
 }

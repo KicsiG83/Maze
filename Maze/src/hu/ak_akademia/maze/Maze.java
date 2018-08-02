@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import javax.swing.JFrame;
+
 
 public class Maze {
+	public JFrame frame;
 	private Player player;
 	private char[][] maze;
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -23,6 +26,9 @@ public class Maze {
 	}
 	public Maze() {
 		player = new Player();
+	}
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 	/**
 	 * Melyik irányba lépjen a játékos.
@@ -51,7 +57,7 @@ public class Maze {
 		
 		if(newX == maze.length - 2 && newY == maze[maze.length - 2].length - 1) {
 			System.out.println("You have escaped.");
-			System.exit(0);
+			frame.dispose();
 		}
 	
 	}
@@ -85,7 +91,8 @@ public class Maze {
 			} else {
 				if(e.getDistanceSquare(player) == 1) {
 					System.out.println("You lose!");
-					System.exit(0);
+					frame.dispose();
+					
 				}
 				
 				int oldX = e.getCoorX();
