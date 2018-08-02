@@ -31,7 +31,7 @@ public class MazeFrame extends KeyAdapter implements ActionListener  {
 		timer.start();
 		mazeOnScreen.setText(maze.toString());
 		frame.addKeyListener(this);
-		frame.setSize(500, 650);
+		frame.setSize(1024,768);
 		frame.setLocationRelativeTo(null);
 		frame.setFocusable(true);
 		frame.setVisible(true);

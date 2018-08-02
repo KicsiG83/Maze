@@ -1,12 +1,9 @@
 package hu.ak_akademia.maze;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-/**
- * 
- * @author balag
- *Labirintus, két mezője van. A játékos és maga az épület
- */
+
 public class Maze {
 	private Player player;
 	private char[][] maze;
@@ -31,6 +28,7 @@ public class Maze {
 	 * Annak megfelelően megváltoztatja a játékos koordinátáit
 	 * @param direction
 	 */
+	
 	public void movePlayer(String direction) {
 		int oldX = player.getCoorX();
 		int oldY = player.getCoorY();
@@ -84,6 +82,9 @@ public class Maze {
 	@Override
 	public String toString() {
 		putMovableToMaze(player);
+		for(Enemy e : enemies) {
+			putMovableToMaze(e);
+		}
 		String result = "";
 		for(Movable obj : enemies) {
 			putMovableToMaze(obj);
@@ -98,7 +99,44 @@ public class Maze {
 	}
 
 	public void moveEnemies() {
-		// TODO Auto-generated method stub
+		String[] directions = {"left","right","up","down"};
+		Random random = new Random();
+		for(Enemy e : enemies) {
+			int oldX = e.getCoorX();
+			int oldY = e.getCoorY();
+			int newX = oldX;
+			int newY = oldY;
+			do {
+				String direction = directions[random.nextInt(directions.length)];
+				switch(direction) {
+				case "up":
+					newX = oldX-1;
+					break;
+				case "down":
+					newX = oldX+1;
+					break;
+				case "left":
+					newY = oldY-1;
+					break;
+				case "right":
+					newY = oldY+1;
+					break;
+				default: break;
+				}
+				if(newX < 0 || newY<0 || newX >= maze.length || newY >= maze[0].length) {
+					continue;
+				}
+			}
+			while(!isFree(newX,newY));
+			if(newX == maze.length - 2 && newY == maze[maze.length - 2].length - 1) {
+				
+			}
+			else {
+				maze[oldX][oldY] = ' ';
+				e.setCoordinates(newX, newY);
+				putMovableToMaze(e);
+			}
+		}
 		
 	}
 	

@@ -18,25 +18,26 @@ public class Main {
 		
 		Enemy[] enemies = new Enemy[4];
 		enemies[0] = new Enemy(game.getRadiusOfAgressitivity());
-		enemies[0].setCoordinates(maze.length - 1, maze[maze.length - 1].length - 1);
+		enemies[0].setCoordinates(maze.length - 2, maze[maze.length - 2].length - 2);
 		enemies[1] = new Enemy(game.getRadiusOfAgressitivity());
-		enemies[1].setCoordinates(1,  maze[1].length - 1);
+		enemies[1].setCoordinates(1,  maze[1].length - 2);
 		enemies[2] = new Enemy(game.getRadiusOfAgressitivity());
-		enemies[2].setCoordinates(maze.length - 1,1);
-		enemies[3] = new Enemy(game.getRadiusOfAgressitivity());
-		int[] fourthCoors =  randomCoordinates(maze);
-		enemies[3].setCoordinates(fourthCoors[0], fourthCoors[1]);
+		enemies[2].setCoordinates(maze.length - 2,1);
+		//enemies[3] = new Enemy(game.getRadiusOfAgressitivity());
+		//int[] fourthCoors =  randomCoordinates(maze);
+		//enemies[3].setCoordinates(fourthCoors[0], fourthCoors[1]);
 		
 		int index = 0;
 		MazeFrame frame = new MazeFrame(maze);
 		while(index < game.getNumberOfEnemies()) {
 			frame.getMaze().getEnemies().add(enemies[index]);
+			index++;
 		}
 		
 		
 	}
 	
-	private int[] randomCoordinates(char[][] maze) {
+	/*private int[] randomCoordinates(char[][] maze) {
 		Random rnd = new Random();
 		int[] result = new int[2];
 		int x = rnd.nextInt(maze.length);
@@ -61,5 +62,5 @@ public class Main {
 		}
 		
 	return result;
-	}
+	}*/
 }

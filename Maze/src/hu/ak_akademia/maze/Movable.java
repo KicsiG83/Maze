@@ -17,4 +17,5 @@ public abstract class Movable {
 		coorY = b;
 		
 	}
+	
 }
