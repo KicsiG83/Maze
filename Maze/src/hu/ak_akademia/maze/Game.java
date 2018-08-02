@@ -10,7 +10,7 @@ public class Game {
 		int helperNumber = Integer.parseInt(settings.getSize())
 				+ Integer.parseInt(settings.getEnemies()) - 2;
 		numberOfEnemies = helperNumber < 3 ? helperNumber : 3;
-		radiusOfAgressitivity = Integer.parseInt(settings.getAggressiveness()) + 1;
+		radiusOfAgressitivity = Integer.parseInt(settings.getAggressiveness()) + 2;
 		
 	}
 
