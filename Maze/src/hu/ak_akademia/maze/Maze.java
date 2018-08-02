@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 
 public class Maze {
-	public JFrame frame;
+	public MazeFrame frame;
 	private Player player;
 	private char[][] maze;
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -27,7 +27,7 @@ public class Maze {
 	public Maze() {
 		player = new Player();
 	}
-	public void setFrame(JFrame frame) {
+	public void setFrame(MazeFrame frame) {
 		this.frame = frame;
 	}
 	/**
@@ -57,7 +57,8 @@ public class Maze {
 		
 		if(newX == maze.length - 2 && newY == maze[maze.length - 2].length - 1) {
 			System.out.println("You have escaped.");
-			frame.dispose();
+			frame.stopTimer();
+			frame.getFrame().dispose();
 		}
 	
 	}
@@ -91,7 +92,8 @@ public class Maze {
 			} else {
 				if(e.getDistanceSquare(player) == 1) {
 					System.out.println("You lose!");
-					frame.dispose();
+					frame.stopTimer();
+					frame.getFrame().dispose();
 					
 				}
 				
@@ -165,5 +167,6 @@ public class Maze {
 		}
 		return result;
 	}
+
 	
 }
