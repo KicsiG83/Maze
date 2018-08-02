@@ -16,11 +16,15 @@ public class Enemy extends Movable {
 	public int getRadiusOfAgressivity() {
 		return radiusOfAgressivity;
 	}
-	public boolean isInRange(Movable player) {
-		int rangeLimit = radiusOfAgressivity * radiusOfAgressivity;
+	public int getDistanceSquare(Movable player) {
+		
 		int squareX = (player.getCoorX() - this.coorX) * (player.getCoorX() - this.coorX);
 		int squareY = (player.getCoorY() - this.coorY) * (player.getCoorY() - this.coorY);
-		int checkSum = squareX + squareY;
+		return squareX + squareY;
+	}
+	public boolean isInRange(Movable player) {
+		int rangeLimit = radiusOfAgressivity * radiusOfAgressivity;
+		int checkSum = getDistanceSquare(player);
 		return rangeLimit >= checkSum;
 	}
 	

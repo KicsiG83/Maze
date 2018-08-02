@@ -83,6 +83,11 @@ public class Maze {
 					putMovableToMaze(e);
 				}
 			} else {
+				if(e.getDistanceSquare(player) == 1) {
+					System.out.println("You lose!");
+					System.exit(0);
+				}
+				
 				int oldX = e.getCoorX();
 				int oldY = e.getCoorY();
 				int[] up = {oldX - 1,oldY};
@@ -96,10 +101,6 @@ public class Maze {
 					if(isFreeStep(optionalSteps[i][0],optionalSteps[i][1])) {
 						Integer distance = (player.getCoorX() - optionalSteps[i][0])*(player.getCoorX() - optionalSteps[i][0]) +
 								(player.getCoorY() - optionalSteps[i][1])*(player.getCoorY() - optionalSteps[i][1]);
-						if(distance.equals(0)) {
-							System.out.println("You lose!");
-							System.exit(0);
-						}
 						distances.add(distance);
 					} else {
 						distances.add(1000000);
