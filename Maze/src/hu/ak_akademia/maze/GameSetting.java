@@ -12,15 +12,15 @@ public class GameSetting {
 
 		printSetting("Please choose which size you want to play: ");
 		size = wrongChoice(sc, size);
-		
+
 		printSetting("Please choose enemies numbers: ");
 		enemies = wrongChoice(sc, enemies);
-		
+
 		printSetting("Please choose enemies aggressiveness: ");
 		aggressiveness = wrongChoice(sc, aggressiveness);
 
 	}
-	
+
 	private String wrongChoice(Scanner sc, String menuNumber) {
 		menuNumber = sc.nextLine();
 		while (!new Validators().isValidNumber(menuNumber)) {
