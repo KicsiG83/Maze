@@ -21,6 +21,7 @@ public class MazeFrame extends KeyAdapter implements ActionListener {
 		timer = new Timer(1000, this);
 		maze = new Maze();
 		maze.setMaze(mazeInChar);
+		maze.placeWeapon();
 		maze.setFrame(this);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mazeOnScreen = new TextArea();

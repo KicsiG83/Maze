@@ -54,21 +54,22 @@ public class MazeGenerator {
 		mazeInString = mazeInString + "+\n";
 //		System.out.println("+");
 
-		char[][] result = fill2DCharArray(mazeInString);
+//		char[][] result = fill2DCharArray(mazeInString);
 		//TODO
 		//Ha készen van a checkNeighbours és a benne lévő replace metódus akkor elég lenne a 60-as sor és törölhető az 57-es
-		//return checkNeighbours(fill2DCharArray(mazeInString));
-		return result;
+//		return checkNeighbours(fill2DCharArray(mazeInString));
+		return checkNeighbours(new TestMaze().test());
+//		return result;
 	}
 
 	private char[][] checkNeighbours(char[][] result) {
-		boolean checkLeft = false;
-		boolean checkRight = false;
-		boolean checkUp = false;
-		boolean checkDown = false;
 		char[][] temp = result;
 		for (int i = 0; i < temp.length; i++) {
-			for (int j = 0; j < temp.length; j++) {
+			for (int j = 0; j < temp[i].length; j++) {
+				boolean checkLeft = false;
+				boolean checkRight = false;
+				boolean checkUp = false;
+				boolean checkDown = false;
 				if (i % 2 == 0) {
 					if (temp[i][j] == '+') {
 						if (i > 0) {
@@ -86,13 +87,15 @@ public class MazeGenerator {
 								checkLeft = true;
 							}
 						}
-						if (j < temp.length - 1) {
-							if (temp[i][j + 1] == ' ') {
+						if (j < temp[i].length - 1) {
+							if (temp[i][j + 1] != ' ') {
 								checkRight = true;
 							}
 						}
 						temp[i][j] = replace(checkUp, checkDown, checkLeft, checkRight);
 					}
+				}else{
+					temp[i][j] = temp[i][j]==' '? ' ' : '│';
 				}
 			}
 		}
@@ -110,8 +113,44 @@ public class MazeGenerator {
 			//plusz jelre csere (lehet erre nem lesz szükség csak a szimpla plusz jelre!)
 		} else if (checkLeft == true && checkRight == true && checkUp == true && checkDown == true) {
 			return '┼';
+			//csak felső
+		} else if (checkLeft == false && checkRight == false && checkUp == true && checkDown == false) {
+			return '│';
+			//felső hiányzik
+		} else if (checkLeft == true && checkRight == true && checkUp == false && checkDown == true) {
+			return '\u252C';
+			//csak alsó
+		} else if (checkLeft == false && checkRight == false && checkUp == false && checkDown == true) {
+			return '│';
+			//alsó hiányzik
+		} else if (checkLeft == true && checkRight == true && checkUp == true && checkDown == false) {
+			return '\u2534';
+			//csak jobb
+		} else if (checkLeft == false && checkRight == true && checkUp == false && checkDown == false) {
+			return '─';
+			//jobb hiányzik
+		} else if (checkLeft == true && checkRight == false && checkUp == true && checkDown == true) {
+			return '\u2524';
+			//csak bal
+		} else if (checkLeft == true && checkRight == false && checkUp == false && checkDown == false) {
+			return '─';
+			//bal hiányzik
+		} else if (checkLeft == false && checkRight == true && checkUp == true && checkDown == true) {
+			return '\u251C';
+			//jobb felső sarok
+		} else if (checkLeft == true && checkRight == false && checkUp == false && checkDown == true) {
+			return '┐';
+			//bal felső sarok
+		} else if (checkLeft == false && checkRight == true && checkUp == false && checkDown == true) {
+			return '┌';
+			//bal alsó sarok
+		} else if (checkLeft == false && checkRight == true && checkUp == true && checkDown == false) {
+			return '└';
+			//jobb alsó sarok
+		} else if (checkLeft == true && checkRight == false && checkUp == true && checkDown == false) {
+			return '\u2518';
 		}
-		return 0;
+		return '\0';
 	}
 
 	private char[][] fill2DCharArray(String mazeInString) {

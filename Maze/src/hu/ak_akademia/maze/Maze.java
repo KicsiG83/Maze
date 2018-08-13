@@ -5,8 +5,9 @@ import java.util.Random;
 
 public class Maze {
 	public MazeFrame frame;
-	private Player player;
 	private char[][] maze;
+	private Player player;
+	private Weapon weapon;
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 	public char[][] getMaze() {
@@ -23,6 +24,7 @@ public class Maze {
 
 	public Maze() {
 		player = new Player();
+		weapon = new Weapon();
 	}
 
 	public void setFrame(MazeFrame frame) {
@@ -57,7 +59,30 @@ public class Maze {
 			frame.getFrame().dispose();
 		}
 	}
-
+	private int[] getCoorsOfFreeCentrum() {
+		int centerX = maze.length / 2;
+		int centerY = maze[centerX].length / 2;
+		int[] result = new int[2];
+		if(isFree(centerX,centerY)) {
+			result[0] = centerX;
+			result[1] = centerY;
+		} else if(isFree(centerX+1,centerY)) {
+			result[0] = centerX+1;
+			result[1] = centerY;	
+		} else if(isFree(centerX,centerY+1)) {
+			result[0] = centerX;
+			result[1] = centerY+1;	
+		} else{
+			result[0] = centerX+1;
+			result[1] = centerY+1;	
+		}
+		return result;
+	}
+	public void placeWeapon() {
+		int[] coorsOfWeapon = getCoorsOfFreeCentrum();
+		weapon.setCoordinates(coorsOfWeapon[0], coorsOfWeapon[1]);
+		putMovableToMaze(weapon);
+	}
 	public void moveEnemies() {
 		String[] directions = { "left", "right", "up", "down" };
 		Random random = new Random();
