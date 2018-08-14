@@ -3,6 +3,7 @@ package hu.ak_akademia.maze;
 import java.util.Arrays;
 import java.util.Collections;
 
+
 public class MazeGenerator {
 	private final int x;
 	private final int y;
@@ -20,7 +21,7 @@ public class MazeGenerator {
 		for (int i = 0; i < y; i++) {
 			// draw the north edge
 			for (int j = 0; j < x; j++) {
-				String s = (maze[j][i] & 1) == 0 ? "────" : "+   ";
+				String s = (maze[j][i] & 1) == 0 ? "+───" : "+   ";
 				mazeInString = mazeInString + s;
 //				System.out.print(s);
 			}
@@ -54,16 +55,22 @@ public class MazeGenerator {
 		mazeInString = mazeInString + "+\n";
 //		System.out.println("+");
 
-		char[][] result = fill2DCharArray(mazeInString);
+//		char[][] result = fill2DCharArray(mazeInString);
 		//TODO
 		//Ha készen van a checkNeighbours és a benne lévő replace metódus akkor elég lenne a 60-as sor és törölhető az 57-es
-//		return checkNeighbours(fill2DCharArray(mazeInString));
-//		return checkNeighbours(new TestMaze().test());
-		return result;
+		return checkNeighbours(fill2DCharArray(mazeInString));
+//		return checkNeighbours(new hu.ak_akademia.maze.test.FirstTestMaze().test());
+//		return checkNeighbours(new hu.ak_akademia.maze.test.SecondTestMaze().test());
+//		return result;
 	}
 
 	private char[][] checkNeighbours(char[][] result) {
-		char[][] temp = result;
+		char[][] temp = new char[result.length][result[0].length];
+		
+		for(int i = 0; i < result.length;i++) {
+			System.arraycopy(result[i], 0, temp[i], 0, result[i].length);
+		}
+		
 		for (int i = 0; i < temp.length; i++) {
 			for (int j = 0; j < temp[i].length; j++) {
 				boolean checkLeft = false;

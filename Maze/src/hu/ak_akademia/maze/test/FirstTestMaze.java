@@ -1,6 +1,6 @@
-package hu.ak_akademia.maze;
+package hu.ak_akademia.maze.test;
 
-public class TestMaze {
+public class FirstTestMaze {
 	String s01 = "+---+---+---+---+---+---+---+---+---+---+";
 	String s02 = "            |           |               |";
 	String s03 = "+---+---+   +---+   +   +   +---+---+   +";
