@@ -34,6 +34,7 @@ public class MazeFrame extends KeyAdapter implements ActionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setFocusable(true);
 		frame.setVisible(true);
+		frame.toFront();
 	}
 
 	public Maze getMaze() {
