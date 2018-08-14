@@ -54,12 +54,12 @@ public class MazeGenerator {
 		mazeInString = mazeInString + "+\n";
 //		System.out.println("+");
 
-//		char[][] result = fill2DCharArray(mazeInString);
+		char[][] result = fill2DCharArray(mazeInString);
 		//TODO
 		//Ha készen van a checkNeighbours és a benne lévő replace metódus akkor elég lenne a 60-as sor és törölhető az 57-es
 //		return checkNeighbours(fill2DCharArray(mazeInString));
-		return checkNeighbours(new TestMaze().test());
-//		return result;
+//		return checkNeighbours(new TestMaze().test());
+		return result;
 	}
 
 	private char[][] checkNeighbours(char[][] result) {

@@ -68,6 +68,13 @@ public class MazeFrame extends KeyAdapter implements ActionListener {
 			maze.movePlayer("up");
 			mazeOnScreen.setText(maze.toString());
 			break;
+		case ' ':
+			if(maze.getPlayer().isUseableWeapon()) {
+				for(Enemy enemy : maze.getEnemies()) {
+					enemy.setOnFlee(true);
+				}
+			}
+			break;
 		default:
 		}
 	}

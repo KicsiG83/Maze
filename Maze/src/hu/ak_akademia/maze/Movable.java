@@ -18,7 +18,13 @@ public abstract class Movable {
 		coorX = a;
 		coorY = b;
 	}
-
+	
+	public int getDistanceSquare(Movable movable) {
+		int squareX = (movable.getCoorX() - this.coorX) * (movable.getCoorX() - this.coorX);
+		int squareY = (movable.getCoorY() - this.coorY) * (movable.getCoorY() - this.coorY);
+		return squareX + squareY;
+	}
+	
 	public int[] move(String direction) {
 		int oldX = coorX;
 		int oldY = coorY;

@@ -3,6 +3,8 @@ package hu.ak_akademia.maze;
 public class Enemy extends Movable {
 	private char symbolInMaze = 'O';
 	private int radiusOfAgressivity;
+	private boolean onFlee;
+	private int fleeDurability = 5;
 
 	public Enemy(int radiusOfAgressivity) {
 		this.radiusOfAgressivity = radiusOfAgressivity;
@@ -12,15 +14,27 @@ public class Enemy extends Movable {
 	public char getSymbolInMaze() {
 		return symbolInMaze;
 	}
+	public boolean isOnFlee() {
+		return onFlee;
+	}
+	public void setSymbolInMaze(char symbolInMaze) {
+		this.symbolInMaze = symbolInMaze;
+	}
+
+	public void setOnFlee(boolean onFlee) {
+		this.onFlee = onFlee;
+	}
 
 	public int getRadiusOfAgressivity() {
 		return radiusOfAgressivity;
 	}
 
-	public int getDistanceSquare(Movable player) {
-		int squareX = (player.getCoorX() - this.coorX) * (player.getCoorX() - this.coorX);
-		int squareY = (player.getCoorY() - this.coorY) * (player.getCoorY() - this.coorY);
-		return squareX + squareY;
+	public int getFleeDurability() {
+		return fleeDurability;
+	}
+
+	public void setFleeDurability(int fleeDurability) {
+		this.fleeDurability = fleeDurability;
 	}
 
 	public boolean isInRange(Movable player) {
@@ -28,4 +42,5 @@ public class Enemy extends Movable {
 		int checkSum = getDistanceSquare(player);
 		return rangeLimit >= checkSum;
 	}
+	
 }
