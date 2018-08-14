@@ -14,18 +14,12 @@ public class Main {
 		new Print().printWelcome();
 		Game game = new Game(new GameSetting(sc));
 		char[][] maze = new MazeGenerator(game.getSizeOfMaze()).display();
-		Enemy[] enemies = new Enemy[3];
-		for(int i = 0; i < enemies.length; i++) {
-			enemies[i] = new Enemy(game.getRadiusOfAgressitivity());
-		}
-		enemies[0].setCoordinates(maze.length - 2, maze[maze.length - 2].length - 2);
-		enemies[1].setCoordinates(1,  maze[1].length - 2);
-		enemies[2].setCoordinates(maze.length - 2,1);
-		int index = 0;
+		EnemyGenerator enemyGenerator = new EnemyGenerator(maze);
+		Enemy[] enemies=enemyGenerator.generate(game.getNumberOfEnemies(), game.getRadiusOfAgressitivity());
 		MazeFrame frame = new MazeFrame(maze);
-		while(index < game.getNumberOfEnemies()) {
-			frame.getMaze().getEnemies().add(enemies[index]);
-			index++;
+		for(Enemy e : enemies) {
+			frame.getMaze().getEnemies().add(e);
 		}
+		
 	}
 }
