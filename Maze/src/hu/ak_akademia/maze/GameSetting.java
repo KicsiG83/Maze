@@ -31,7 +31,7 @@ public class GameSetting {
 	}
 
 	private void printSetting(String message) {
-		System.out.println("***********************************");
+		System.out.println("**********************************************");
 		System.out.println(" ╔ 1. Easy");
 		System.out.println(" ╠ 2. Normal");
 		System.out.println(" ╚ 3. Hard");

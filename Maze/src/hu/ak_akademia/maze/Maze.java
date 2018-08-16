@@ -38,8 +38,8 @@ public class Maze {
 	public void movePlayer(String direction) {
 		if (player.getDistanceSquare(weapon) == 1) {
 			player.pickUpWeapon();
-			maze[weapon.getCoorX()][weapon.getCoorY()]=' ';
-			
+			maze[weapon.getCoorX()][weapon.getCoorY()] = ' ';
+
 		}
 		int oldX = player.getCoorX();
 		int oldY = player.getCoorY();
@@ -57,35 +57,41 @@ public class Maze {
 		putMovableToMaze(player);
 
 		if (newX == maze.length - 2 && newY == maze[maze.length - 2].length - 1) {
-			System.out.println("Game Over!\nYou have escaped.");
+			// System.out.println("Game Over!\nYou have escaped.");
+			Print print = new Print();
+			print.gameOver();
+			print.youWon();
 			frame.stopTimer();
 			frame.getFrame().dispose();
 		}
 	}
+
 	private int[] getCoorsOfFreeCentrum() {
 		int centerX = maze.length / 2;
 		int centerY = maze[centerX].length / 2;
 		int[] result = new int[2];
-		if(isFree(centerX,centerY)) {
+		if (isFree(centerX, centerY)) {
 			result[0] = centerX;
 			result[1] = centerY;
-		} else if(isFree(centerX+1,centerY)) {
-			result[0] = centerX+1;
-			result[1] = centerY;	
-		} else if(isFree(centerX,centerY+1)) {
+		} else if (isFree(centerX + 1, centerY)) {
+			result[0] = centerX + 1;
+			result[1] = centerY;
+		} else if (isFree(centerX, centerY + 1)) {
 			result[0] = centerX;
-			result[1] = centerY+1;	
-		} else{
-			result[0] = centerX+1;
-			result[1] = centerY+1;	
+			result[1] = centerY + 1;
+		} else {
+			result[0] = centerX + 1;
+			result[1] = centerY + 1;
 		}
 		return result;
 	}
+
 	public void placeWeapon() {
 		int[] coorsOfWeapon = getCoorsOfFreeCentrum();
 		weapon.setCoordinates(coorsOfWeapon[0], coorsOfWeapon[1]);
 		putMovableToMaze(weapon);
 	}
+
 	public void moveEnemies() {
 		String[] directions = { "left", "right", "up", "down" };
 		Random random = new Random();
@@ -93,9 +99,9 @@ public class Maze {
 			int oldX = e.getCoorX();
 			int oldY = e.getCoorY();
 			if (e.isOnFlee()) {
-				if(e.getFleeDurability()>0) {
-					e.setFleeDurability(e.getFleeDurability()-1);
-				}else {
+				if (e.getFleeDurability() > 0) {
+					e.setFleeDurability(e.getFleeDurability() - 1);
+				} else {
 					e.setOnFlee(false);
 				}
 				e.setSymbolInMaze('o');
@@ -125,11 +131,13 @@ public class Maze {
 				maze[oldX][oldY] = ' ';
 				e.setCoordinates(optionalSteps[maxIndex][0], optionalSteps[maxIndex][1]);
 				putMovableToMaze(e);
-			}
-			else if (e.isInRange(player)) {
+			} else if (e.isInRange(player)) {
 				e.setSymbolInMaze('ő');
 				if (e.getDistanceSquare(player) == 1) {
-					System.out.println("Game Over!\nYou lose!");
+					Print print = new Print();
+					print.gameOver();
+					print.youLose();
+					// System.out.println("Game Over!\nYou lose!");
 					frame.stopTimer();
 					frame.getFrame().dispose();
 				}
@@ -168,7 +176,7 @@ public class Maze {
 					int[] aimField = e.move(direction);
 					newX = aimField[0];
 					newY = aimField[1];
-					
+
 					if (newX < 0 || newY < 0 || newX >= maze.length || newY >= maze[0].length) {
 						continue;
 					}
@@ -178,7 +186,7 @@ public class Maze {
 					maze[oldX][oldY] = ' ';
 					e.setCoordinates(newX, newY);
 					putMovableToMaze(e);
-				}				
+				}
 			}
 		}
 	}
