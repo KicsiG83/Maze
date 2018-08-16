@@ -27,7 +27,7 @@ public class Main {
 			}
 			break;
 		case 2:
-			print.createdBy();
+			print.aboutMaze();
 			break;
 		case 3:
 			print.bye();
