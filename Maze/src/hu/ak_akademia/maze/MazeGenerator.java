@@ -3,7 +3,6 @@ package hu.ak_akademia.maze;
 import java.util.Arrays;
 import java.util.Collections;
 
-
 public class MazeGenerator {
 	private final int x;
 	private final int y;
@@ -23,10 +22,8 @@ public class MazeGenerator {
 			for (int j = 0; j < x; j++) {
 				String s = (maze[j][i] & 1) == 0 ? "+───" : "+   ";
 				mazeInString = mazeInString + s;
-//				System.out.print(s);
 			}
 			mazeInString = mazeInString + "+\n";
-//			System.out.println("+");
 			// draw the west edge
 			for (int j = 0; j < x; j++) {
 				String s;
@@ -36,41 +33,24 @@ public class MazeGenerator {
 					s = (maze[j][i] & 8) == 0 ? "│   " : "    ";
 				}
 				mazeInString = mazeInString + s;
-//				System.out.print(s);
 			}
 			String west = i == y - 1 ? " \n" : "|\n";
 			mazeInString = mazeInString + west;
-			if (i == y - 1) {
-//				System.out.println("");
-			} else {
-//				System.out.println("|");
-			}
 		}
 		// draw the bottom line
 		for (int j = 0; j < x; j++) {
 			String s = "+───";
 			mazeInString = mazeInString + s;
-//			System.out.print(s);
 		}
 		mazeInString = mazeInString + "+\n";
-//		System.out.println("+");
-
-//		char[][] result = fill2DCharArray(mazeInString);
-		//TODO
-		//Ha készen van a checkNeighbours és a benne lévő replace metódus akkor elég lenne a 60-as sor és törölhető az 57-es
 		return checkNeighbours(fill2DCharArray(mazeInString));
-//		return checkNeighbours(new hu.ak_akademia.maze.test.FirstTestMaze().test());
-//		return checkNeighbours(new hu.ak_akademia.maze.test.SecondTestMaze().test());
-//		return result;
 	}
 
 	private char[][] checkNeighbours(char[][] result) {
 		char[][] temp = new char[result.length][result[0].length];
-		
 		for(int i = 0; i < result.length;i++) {
 			System.arraycopy(result[i], 0, temp[i], 0, result[i].length);
 		}
-		
 		for (int i = 0; i < temp.length; i++) {
 			for (int j = 0; j < temp[i].length; j++) {
 				boolean checkLeft = false;
@@ -110,7 +90,6 @@ public class MazeGenerator {
 	}
 
 	private char replace(boolean checkUp, boolean checkDown, boolean checkLeft, boolean checkRight) {
-		//TODO be kellene fejezni az összes variációra, ami létezik.
 		//vízszintesre csere 
 		if (checkUp == false && checkDown == false && checkLeft == true && checkRight == true) {
 			return '─';
@@ -212,4 +191,5 @@ public class MazeGenerator {
 			this.dy = dy;
 		}
 	}
+	
 }

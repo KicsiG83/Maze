@@ -8,7 +8,6 @@ public class EnemyGenerator {
 	ArrayList<Integer[]> validCoors= new ArrayList<Integer[]>();
 	Random random = new Random();
 	
-
 	public EnemyGenerator(char[][] maze) {
 		this.maze = maze;
 		setValidCoors();
@@ -23,6 +22,7 @@ public class EnemyGenerator {
 		}
 		return enemies;
 	}
+	
 	private int[] getCoorsOfFreeCentrum() {
 		int centerX = maze.length / 2;
 		int centerY = maze[centerX].length / 2;
@@ -42,36 +42,38 @@ public class EnemyGenerator {
 		}
 		return result;
 	}
+	
 	private boolean isFree(int x, int y) {
 		if (maze[x][y] == ' ') {
 			return true;
 		}
 		return false;
 	}
+	
 	private void setValidCoors(){
 		int[] centrumCoors = getCoorsOfFreeCentrum();		
 		for(int i = maze.length/3;i<maze.length;i++) {
 			for(int j=maze[i].length/3;j<maze[i].length;j++) {
-				if(maze[i][j]==' ' && !(i==centrumCoors[0] && j==centrumCoors[1])) {
+				if(isFree(i,j) && !(i==centrumCoors[0] && j==centrumCoors[1])) {
 					Integer[] addMe = {i,j};
 					validCoors.add(addMe);
 				}
 			}
 		}
 	}
+	
 	private int[] getRandomCoordinates() {
-		
 		ArrayList<Integer[]> validCoors=getValidCoors();
 		int[] result = new int[2];
 		int randomIndexOfValidCoors = random.nextInt(validCoors.size());
 		result[0] = (int) validCoors.get(randomIndexOfValidCoors)[0];
 		result[1] = (int) validCoors.get(randomIndexOfValidCoors)[1];
 		validCoors.remove(randomIndexOfValidCoors);
-		
 		return result;
 	}
 
 	private ArrayList<Integer[]> getValidCoors() {
 		return validCoors;
 	}
+	
 }

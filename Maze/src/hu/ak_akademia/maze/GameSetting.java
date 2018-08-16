@@ -3,22 +3,17 @@ package hu.ak_akademia.maze;
 import java.util.Scanner;
 
 public class GameSetting {
-
 	private String size;
 	private String enemies;
 	private String aggressiveness;
 
 	public GameSetting(Scanner sc) {
-
 		printSetting("Please choose which size you want to play: ");
 		size = wrongChoice(sc, size);
-
-		printSetting("Please choose enemies numbers: ");
+		printSetting("Please choose how many enemies you want: ");
 		enemies = wrongChoice(sc, enemies);
-
 		printSetting("Please choose enemies aggressiveness: ");
 		aggressiveness = wrongChoice(sc, aggressiveness);
-
 	}
 
 	private String wrongChoice(Scanner sc, String menuNumber) {

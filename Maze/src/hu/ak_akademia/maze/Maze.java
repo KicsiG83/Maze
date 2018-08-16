@@ -4,42 +4,48 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Maze {
-	public MazeFrame frame;
+	private MazeFrame frame;
+	private Print print = new Print();
 	private char[][] maze;
 	private Player player;
 	private Weapon weapon;
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-
-	public char[][] getMaze() {
-		return maze;
-	}
-
-	public ArrayList<Enemy> getEnemies() {
-		return enemies;
-	}
-
-	public void setMaze(char[][] maze) {
-		this.maze = maze;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
 
 	public Maze() {
 		player = new Player();
 		weapon = new Weapon();
 	}
 
+	public ArrayList<Enemy> getEnemies() {
+		return enemies;
+	}
+
+	public char[][] getMaze() {
+		return maze;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setMaze(char[][] maze) {
+		this.maze = maze;
+	}
+
 	public void setFrame(MazeFrame frame) {
 		this.frame = frame;
+	}
+
+	public void placeWeapon() {
+		int[] coorsOfWeapon = getCoorsOfFreeCentrum();
+		weapon.setCoordinates(coorsOfWeapon[0], coorsOfWeapon[1]);
+		putMovableToMaze(weapon);
 	}
 
 	public void movePlayer(String direction) {
 		if (player.getDistanceSquare(weapon) == 1) {
 			player.pickUpWeapon();
 			maze[weapon.getCoorX()][weapon.getCoorY()] = ' ';
-
 		}
 		int oldX = player.getCoorX();
 		int oldY = player.getCoorY();
@@ -57,39 +63,11 @@ public class Maze {
 		putMovableToMaze(player);
 
 		if (newX == maze.length - 2 && newY == maze[maze.length - 2].length - 1) {
-			// System.out.println("Game Over!\nYou have escaped.");
-			Print print = new Print();
 			print.gameOver();
 			print.youWon();
 			frame.stopTimer();
 			frame.getFrame().dispose();
 		}
-	}
-
-	private int[] getCoorsOfFreeCentrum() {
-		int centerX = maze.length / 2;
-		int centerY = maze[centerX].length / 2;
-		int[] result = new int[2];
-		if (isFree(centerX, centerY)) {
-			result[0] = centerX;
-			result[1] = centerY;
-		} else if (isFree(centerX + 1, centerY)) {
-			result[0] = centerX + 1;
-			result[1] = centerY;
-		} else if (isFree(centerX, centerY + 1)) {
-			result[0] = centerX;
-			result[1] = centerY + 1;
-		} else {
-			result[0] = centerX + 1;
-			result[1] = centerY + 1;
-		}
-		return result;
-	}
-
-	public void placeWeapon() {
-		int[] coorsOfWeapon = getCoorsOfFreeCentrum();
-		weapon.setCoordinates(coorsOfWeapon[0], coorsOfWeapon[1]);
-		putMovableToMaze(weapon);
 	}
 
 	public void moveEnemies() {
@@ -116,7 +94,8 @@ public class Maze {
 					if (isFreeStep(optionalSteps[i][0], optionalSteps[i][1])) {
 						Integer distance = (player.getCoorX() - optionalSteps[i][0])
 								* (player.getCoorX() - optionalSteps[i][0])
-								+ (player.getCoorY() - optionalSteps[i][1]) * (player.getCoorY() - optionalSteps[i][1]);
+								+ (player.getCoorY() - optionalSteps[i][1])
+								* (player.getCoorY() - optionalSteps[i][1]);
 						distances.add(distance);
 					} else {
 						distances.add(0);
@@ -134,10 +113,8 @@ public class Maze {
 			} else if (e.isInRange(player)) {
 				e.setSymbolInMaze('ő');
 				if (e.getDistanceSquare(player) == 1) {
-					Print print = new Print();
 					print.gameOver();
 					print.youLose();
-					// System.out.println("Game Over!\nYou lose!");
 					frame.stopTimer();
 					frame.getFrame().dispose();
 				}
@@ -147,12 +124,12 @@ public class Maze {
 				int[] right = { oldX, oldY + 1 };
 				int[][] optionalSteps = { up, down, left, right };
 				ArrayList<Integer> distances = new ArrayList<Integer>();
-
 				for (int i = 0; i < optionalSteps.length; i++) {
 					if (isFreeStep(optionalSteps[i][0], optionalSteps[i][1])) {
 						Integer distance = (player.getCoorX() - optionalSteps[i][0])
 								* (player.getCoorX() - optionalSteps[i][0])
-								+ (player.getCoorY() - optionalSteps[i][1]) * (player.getCoorY() - optionalSteps[i][1]);
+								+ (player.getCoorY() - optionalSteps[i][1])
+								* (player.getCoorY() - optionalSteps[i][1]);
 						distances.add(distance);
 					} else {
 						distances.add(1000000);
@@ -208,6 +185,26 @@ public class Maze {
 		return false;
 	}
 
+	private int[] getCoorsOfFreeCentrum() {
+		int centerX = maze.length / 2;
+		int centerY = maze[centerX].length / 2;
+		int[] result = new int[2];
+		if (isFree(centerX, centerY)) {
+			result[0] = centerX;
+			result[1] = centerY;
+		} else if (isFree(centerX + 1, centerY)) {
+			result[0] = centerX + 1;
+			result[1] = centerY;
+		} else if (isFree(centerX, centerY + 1)) {
+			result[0] = centerX;
+			result[1] = centerY + 1;
+		} else {
+			result[0] = centerX + 1;
+			result[1] = centerY + 1;
+		}
+		return result;
+	}
+
 	private void putMovableToMaze(Movable obj) {
 		maze[obj.getCoorX()][obj.getCoorY()] = obj.getSymbolInMaze();
 	}
@@ -230,4 +227,5 @@ public class Maze {
 		}
 		return result;
 	}
+	
 }

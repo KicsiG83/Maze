@@ -30,7 +30,6 @@ public abstract class Movable {
 		int oldY = coorY;
 		int newX = oldX;
 		int newY = oldY;
-
 		switch (direction) {
 		case "up":
 			newX = oldX - 1;
@@ -50,4 +49,5 @@ public abstract class Movable {
 		int[] result = { newX, newY };
 		return result;
 	}
+	
 }

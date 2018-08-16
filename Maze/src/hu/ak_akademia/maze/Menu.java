@@ -3,8 +3,7 @@ package hu.ak_akademia.maze;
 import java.util.Scanner;
 
 public class Menu {
-
-	String menuChoice;
+	private String menuChoice;
 
 	public int getMenuChoice() {
 		return Integer.parseInt(menuChoice);

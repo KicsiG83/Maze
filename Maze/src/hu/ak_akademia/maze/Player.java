@@ -9,19 +9,24 @@ public class Player extends Movable {
 		super.coorX = 1;
 		super.coorY = 0;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	@Override
 	public char getSymbolInMaze() {
 		return symbolInMaze;
 	}
+	
 	public boolean isUseableWeapon() {
 		return useableWeapon;
 	}
+	
 	public void setUseableWeapon(boolean useableWeapon) {
 		this.useableWeapon = useableWeapon;
 	}
+	
 	public void pickUpWeapon() {
 		useableWeapon = true;
 		
